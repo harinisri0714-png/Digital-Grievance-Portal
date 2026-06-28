@@ -7,6 +7,7 @@ const complaintRoutes = require("./routes/complaintRoutes");
 
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
@@ -16,12 +17,18 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log("MongoDB Error:", err));
 
+// Routes
 app.use("/api/complaints", complaintRoutes);
 
+// Test Route
 app.get("/", (req, res) => {
   res.send("Server Running");
 });
 
-app.listen(5000, () => {
-  console.log("Server Running on Port 5000");
+// Render / Local Port
+const PORT = process.env.PORT || 5000;
+
+// Start Server
+app.listen(PORT, () => {
+  console.log(`Server Running on Port ${PORT}`);
 });
